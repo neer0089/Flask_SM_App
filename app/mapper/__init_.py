@@ -1,5 +1,6 @@
-from app.smapp import create_mongo_client
 from pymongo import MongoClient
+
+from app.smapp import create_mongo_client
 
 
 class Mapper:

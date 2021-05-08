@@ -1,7 +1,8 @@
 """Post Mapper Module."""
 
-from app.mapper.mapper import Mapper
 from bson import ObjectId
+
+from app.mapper.mapper import Mapper
 
 
 def data_helper(data) -> dict:

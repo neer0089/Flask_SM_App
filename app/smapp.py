@@ -2,8 +2,8 @@
 
 from flask import Flask
 from flask_login import LoginManager
-from app.containers import ConfigContainer
 
+from app.containers import ConfigContainer
 
 config_container = ConfigContainer()
 config_container.config.from_ini('./config.ini')
@@ -22,6 +22,6 @@ def home():
     return 'Welcome to the flask social media app!'
 
 
-from app.controller import postscontroller, usercontroller # noqa
-from app.mapper import postsmapper, usermapper # noqa
-from app.model import user # noqa
+from app.controller import postscontroller, usercontroller  # noqa
+from app.mapper import postsmapper, usermapper  # noqa
+from app.model import user  # noqa

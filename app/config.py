@@ -3,6 +3,7 @@
 import os
 from secrets import token_hex
 
+
 class Config():
     def __init__(self):
         self._login_secret = token_hex(32)

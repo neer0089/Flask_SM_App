@@ -2,12 +2,12 @@
 
 import json
 
-from flask import request, Response
-from flask_login import login_user, logout_user, login_required
+from flask import Response, request
+from flask_login import login_required, login_user, logout_user
 from werkzeug.security import generate_password_hash
 
-from app.smapp import app, login_manager
 from app.containers import UserMapperContainer
+from app.smapp import app, login_manager
 
 
 @app.route("/api/v1/user/register/", methods=["POST"])

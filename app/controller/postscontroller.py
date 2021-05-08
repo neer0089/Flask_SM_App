@@ -2,11 +2,11 @@
 
 import json
 
-from app.smapp import app
-from app.containers import PostsMapperContainer
-
-from flask import request, Response
+from flask import Response, request
 from flask_login import current_user, login_required
+
+from app.containers import PostsMapperContainer
+from app.smapp import app
 
 
 @app.route("/api/v1/post/add/", methods=["POST"])

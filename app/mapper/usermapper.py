@@ -1,7 +1,7 @@
 """User Mapper Module."""
 
-from app.model.user import User
 from app.mapper.mapper import Mapper
+from app.model.user import User
 
 
 class UserMapper(Mapper):
