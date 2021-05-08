@@ -30,7 +30,6 @@ def register():
         )
     res = json.dumps({'message': result})
     return Response(res, mimetype='application/json')
-    return "hello"
          
 
 @app.route("/api/v1/user/login/", methods=["POST"])

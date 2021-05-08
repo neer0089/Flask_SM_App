@@ -19,3 +19,10 @@ from app.mapper.usermapper import UserMapper
 
 class UserMapperContainer(containers.DeclarativeContainer):
     user_mapper = providers.Singleton(UserMapper)
+
+
+
+from app.mapper.postsmapper import PostsMapper
+
+class PostsMapperContainer(containers.DeclarativeContainer):
+    posts_mapper = providers.Singleton(PostsMapper)

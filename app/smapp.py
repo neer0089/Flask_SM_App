@@ -17,6 +17,10 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 app.secret_key = config_container.config.sm.login_secret()
 
+@app.route('/')
+def hello_world():
+    return 'Welcome to the flask social media app!'
+
 
 from app.controller import postscontroller, usercontroller
 from app.mapper import postsmapper, usermapper

@@ -1,7 +1,7 @@
 from dependency_injector import containers, providers
 from app.model.user import User
 from app.mapper.mapper import Mapper
-import sys
+
 
 class UserMapper(Mapper):
     """Store information about logged in users."""
