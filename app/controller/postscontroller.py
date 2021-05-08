@@ -46,7 +46,7 @@ def get_posts(username):
     return posts_mapper.get_posts(username)
 
 
-@app.route("/api/v1/post/like-post/<post_id>", methods=["POST"])
+@app.route("/api/v1/post/like/<post_id>", methods=["POST"])
 @login_required
 def like(post_id):
     """Like post endpoint."""

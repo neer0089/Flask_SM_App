@@ -1,4 +1,6 @@
 # Flask_SM_App
+A simple social media REST API. Where users can post posts and eventually
+like and comment on those posts. 
 
 ## Intstallation and Usage:
 
