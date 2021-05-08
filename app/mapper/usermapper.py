@@ -1,4 +1,5 @@
-from dependency_injector import containers, providers
+"""User Mapper Module."""
+
 from app.model.user import User
 from app.mapper.mapper import Mapper
 

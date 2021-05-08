@@ -1,56 +1,45 @@
-from app.smapp import app
-from app.mapper.usermapper import UserMapper
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask import request, redirect, Response
-from flask_login import current_user, login_user, logout_user, login_required
-from flask_login import LoginManager
-from app.smapp import login_manager
+"""User Controller Module."""
+
 import json
+
+from flask import request, Response
+from flask_login import login_user, logout_user, login_required
+from werkzeug.security import generate_password_hash
+
+from app.smapp import app, login_manager
 from app.containers import UserMapperContainer
 
 
 @app.route("/api/v1/user/register/", methods=["POST"])
 def register():
-    """Login end point."""
-    form_data = request.form
-    missing_fields = []
-
-    for k, v in form_data.items():
-        if v == "":
-            missing_fields.append(k)
-
-    if missing_fields:
-        message = f"Missing fields for {', '.join(missing_fields)}"
-        res = json.dumps({'message': message})
-        return Response(res, status=422, mimetype='application/json')
-
-    result = register(
+    """User registration end point."""
+    result = user_register(
         request.form["username"],
         generate_password_hash(request.form["password"])
         )
     res = json.dumps({'message': result})
     return Response(res, mimetype='application/json')
-         
+
 
 @app.route("/api/v1/user/login/", methods=["POST"])
 def login():
     """Login end point."""
-    result = login(request.form["username"], request.form["password"])
+    result = user_login(request.form["username"], request.form["password"])
     res = json.dumps({"message": result})
     return Response(res, mimetype='application/json')
+
 
 @app.route("/api/v1/user/logout/")
 @login_required
 def logout():
     """Logout end point."""
-    result = logout()
+    result = user_logout()
     res = json.dumps({"message": result})
     return Response(res, mimetype='application/json')
 
 
-def login(username, password):
+def user_login(username, password):
     """Login the user identified by a username and password."""
-
     user_mapper = UserMapperContainer.user_mapper()
     user = user_mapper.get_user(username)
     if user and user.check_password(password):
@@ -59,8 +48,9 @@ def login(username, password):
     else:
         return ("Invalid username or password!")
 
-def register(username, password):
-    """Registers a user."""
+
+def user_register(username, password):
+    """Register a user."""
     user_mapper = UserMapperContainer.user_mapper()
     user = user_mapper.get_user(username)
     if user:
@@ -69,10 +59,12 @@ def register(username, password):
         user_mapper.add_user(username, password)
         return ("User registered successfully.")
 
-def logout():
-    """Logouts a user."""
+
+def user_logout():
+    """Logout a user."""
     logout_user()
     return ("Logout successfull.")
+
 
 @login_manager.user_loader
 def load_user(user_id):

@@ -1,9 +1,7 @@
 """Social Media Application."""
 
-import sys
 from flask import Flask
 from flask_login import LoginManager
-from app import smapp
 from app.containers import ConfigContainer
 
 
@@ -17,11 +15,13 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 app.secret_key = config_container.config.sm.login_secret()
 
+
 @app.route('/')
-def hello_world():
+def home():
+    """Home page endpoint."""
     return 'Welcome to the flask social media app!'
 
 
-from app.controller import postscontroller, usercontroller
-from app.mapper import postsmapper, usermapper
-from app.model import user
+from app.controller import postscontroller, usercontroller # noqa
+from app.mapper import postsmapper, usermapper # noqa
+from app.model import user # noqa
