@@ -1,5 +1,6 @@
 from dependency_injector import containers, providers
 from app.mapper.mapper import Mapper
+from bson import ObjectId
 
 
 def data_helper(data) -> dict:
@@ -29,6 +30,17 @@ class PostsMapper(Mapper):
         for post in posts:
             result.append(data_helper(post))
         return result
+    
+    def like_post(self, post_id):
+        posts_collection = self.posts_collection
+        posts_collection.update_one( {"_id": ObjectId(post_id)},{"$inc": {"likes": 1}})
+
+    def comment_post(self, post_id, comment):
+        posts_collection = self.posts_collection
+        posts_collection.update_one(
+            {"_id": ObjectId(post_id)},
+            {'$push': {'comments': comment}}
+            )
 
     @property
     def posts_collection(self):

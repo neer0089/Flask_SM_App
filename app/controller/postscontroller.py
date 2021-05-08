@@ -12,8 +12,7 @@ import json
 @app.route("/api/v1/post/add-post/", methods=["POST"])
 @login_required
 def add_post():
-    post = request.get_json(force=True)
-    result = add_post(post["post_content"])
+    result = add_post(request.form["post"])
     res = json.dumps({'message': result})
     return Response(res, mimetype='application/json')
 
@@ -38,3 +37,27 @@ def get_posts(username):
 def get_post(username):
     posts_mapper = PostsMapperContainer.posts_mapper()
     return posts_mapper.get_posts(username)
+
+@app.route("/api/v1/post/like-post/<post_id>", methods=["POST"])
+@login_required
+def like_post(post_id):
+    result = like_post(post_id)
+    res = json.dumps({'message': result})
+    return Response(res, mimetype='application/json')
+
+def like_post(post_id):
+    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper.like_post(post_id)
+    return "Post liked."
+
+@app.route("/api/v1/post/comment/<post_id>", methods=["POST"])
+@login_required
+def comment_post(post_id):
+    result = comment_post(post_id, request.form["comment"])
+    res = json.dumps({'message': result})
+    return Response(res, mimetype='application/json')
+
+def comment_post(post_id, comment):
+    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper.comment_post(post_id, comment)
+    return "Comment added to the post."
