@@ -24,4 +24,3 @@ Once configuration is properly done. Simply run:
 `python run.py`
 
 This will spwan a development server running the application.
-For production this is not recommended.

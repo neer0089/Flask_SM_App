@@ -76,3 +76,19 @@ def comment_post(post_id, comment):
     posts_mapper = PostsMapperContainer.posts_mapper()
     posts_mapper.comment_post(post_id, comment)
     return "Comment added to the post."
+
+
+@app.route("/api/v1/post/delete/<post_id>", methods=["POST"])
+@login_required
+def delete(post_id):
+    """Delete post endpoint."""
+    result = delete_post(post_id)
+    res = json.dumps({'message': result})
+    return Response(res, mimetype='application/json')
+
+
+def delete_post(post_id):
+    """Delete a post from the database."""
+    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper.delete_post(post_id)
+    return "Post deleted."

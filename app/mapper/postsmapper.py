@@ -46,6 +46,11 @@ class PostsMapper(Mapper):
             {'$push': {'comments': comment}}
             )
 
+    def delete_post(self, post_id):
+        """Delete a post from the database."""
+        posts_collection = self.posts_collection
+        posts_collection.remove({"_id": ObjectId(post_id)})
+
     @property
     def posts_collection(self):
         """Creates/gets posts collection from the social media DB."""
