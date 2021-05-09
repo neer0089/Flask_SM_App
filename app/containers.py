@@ -16,6 +16,8 @@ class MongoClientContainer(containers.DeclarativeContainer):
     mongo_client = providers.Singleton(MongoClient)
 
 
+mongo_client_container = MongoClientContainer()
+
 from app.mapper.usermapper import UserMapper  # noqa
 
 

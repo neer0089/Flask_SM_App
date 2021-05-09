@@ -1,6 +1,7 @@
 """Object Persistence."""
 
-from app.containers import ConfigContainer, MongoClientContainer
+from app.containers import ConfigContainer
+from app.containers import mongo_client_container
 
 
 class Mapper:
@@ -21,14 +22,14 @@ class Mapper:
         dependencies.
         """
         super().__init__()
-        self._dicontainer = ConfigContainer()
+        self._config_container = ConfigContainer()
 
     @property
     def mongoclient(self):
         """Get the MongoClient that the mapper uses to talk to the DB."""
-        client = MongoClientContainer.mongo_client(
-            self._dicontainer.config.sm.mongodb_host(),
-            self._dicontainer.config.sm.mongodb_port()
+        client = mongo_client_container.mongo_client(
+            self._config_container.config.sm.mongodb_host(),
+            self._config_container.config.sm.mongodb_port()
         )
         return client
 
