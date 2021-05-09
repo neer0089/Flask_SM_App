@@ -19,5 +19,5 @@ def client():
 
 @pytest.fixture(scope='module')
 def mock_mongo():
-    """Override Mongoclient with mock MongoClient."""
+    """Override Mongoclient with mock MongoClient for test."""
     mongo_client_container.mongo_client.override(providers.Singleton(MongoClient))

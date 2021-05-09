@@ -11,10 +11,14 @@ def test_home_page(client):
     assert response.status_code == 200
 
 
-def test_mongo(client, mock_mongo):
-    """a"""
+def test_user_registration(client, mock_mongo):
+    """
+    Given a flask application
+    When the '/api/v1/user/register/' route is called
+    Then check that a '200' status code is returned.
+    """
     request = {
-        "username": "testuser2",
+        "username": "testuser",
         "password": "secret"
     }
     response = client.post(

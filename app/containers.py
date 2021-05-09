@@ -10,6 +10,9 @@ class ConfigContainer(containers.DeclarativeContainer):
     config = providers.Configuration('config')
 
 
+config_container = ConfigContainer()
+
+
 class MongoClientContainer(containers.DeclarativeContainer):
     """Container for MongoClient object."""
 
@@ -27,6 +30,8 @@ class UserMapperContainer(containers.DeclarativeContainer):
     user_mapper = providers.Singleton(UserMapper)
 
 
+user_mapper_container = UserMapperContainer()
+
 from app.mapper.postsmapper import PostsMapper  # noqa
 
 
@@ -34,3 +39,6 @@ class PostsMapperContainer(containers.DeclarativeContainer):
     """Container for PostsMapper object."""
 
     posts_mapper = providers.Singleton(PostsMapper)
+
+
+posts_mapper_container = PostsMapperContainer()

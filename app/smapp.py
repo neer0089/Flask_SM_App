@@ -3,9 +3,9 @@
 from flask import Flask
 from flask_login import LoginManager
 
-from app.containers import ConfigContainer
+from app.containers import config_container
 
-config_container = ConfigContainer()
+
 config_container.config.from_ini('./config.ini')
 
 app = Flask(__name__)

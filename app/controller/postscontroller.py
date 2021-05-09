@@ -5,7 +5,7 @@ import json
 from flask import Response, request
 from flask_login import current_user, login_required
 
-from app.containers import PostsMapperContainer
+from app.containers import posts_mapper_container
 from app.smapp import app
 
 
@@ -26,7 +26,7 @@ def add_post(post_content):
     post["comments"] = []
     post["user"] = current_user.get_id()
 
-    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper = posts_mapper_container.posts_mapper()
     posts_mapper.add_post(post)
 
     return ("Post added successfully.")
@@ -42,7 +42,7 @@ def posts(username):
 
 def get_posts(username):
     """Get all the post for a particular user."""
-    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper = posts_mapper_container.posts_mapper()
     return posts_mapper.get_posts(username)
 
 
@@ -57,7 +57,7 @@ def like(post_id):
 
 def like_post(post_id):
     """Add a like to a post in database."""
-    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper = posts_mapper_container.posts_mapper()
     posts_mapper.like_post(post_id)
     return "Post liked."
 
@@ -73,7 +73,7 @@ def comment(post_id):
 
 def comment_post(post_id, comment):
     """Add a comment to a post in database."""
-    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper = posts_mapper_container.posts_mapper()
     posts_mapper.comment_post(post_id, comment)
     return "Comment added to the post."
 
@@ -89,6 +89,6 @@ def delete(post_id):
 
 def delete_post(post_id):
     """Delete a post from the database."""
-    posts_mapper = PostsMapperContainer.posts_mapper()
+    posts_mapper = posts_mapper_container.posts_mapper()
     posts_mapper.delete_post(post_id)
     return "Post deleted."
