@@ -18,7 +18,7 @@ class Mapper:
         """Get the MongoClient that the mapper uses to talk to the DB."""
         client = mongo_client_container.mongo_client(
             config_container.config.sm.mongodb_host(),
-            config_container.config.sm.mongodb_port()
+            int(config_container.config.sm.mongodb_port()),
         )
         return client
 
